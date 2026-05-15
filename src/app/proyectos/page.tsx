@@ -4,8 +4,8 @@ import { ProjectGrid, type SanityProject } from "@/components/project-grid"
 import { client } from "@/lib/sanity"
 
 export const metadata = {
-  title: "Proyectos | BOG Estudio de Arquitectura",
-  description: "Explora nuestra colección de proyectos arquitectónicos. Desde residencias de lujo hasta complejos culturales.",
+  title: "Proyectos",
+  description: "Explora la colección de proyectos arquitectónicos de BOG. Desde residencias de lujo hasta complejos culturales.",
 }
 
 export default async function ProyectosPage() {

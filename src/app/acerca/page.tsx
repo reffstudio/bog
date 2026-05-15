@@ -3,8 +3,8 @@ import { Header } from "@/components/header"
 import { AboutSection } from "@/components/about-section"
 
 export const metadata = {
-  title: "Acerca de BOG | Estudio de Arquitectura",
-  description: "Conoce a BOG, un estudio de arquitectura dedicado a crear espacios que trascienden lo convencional.",
+  title: "Acerca",
+  description: "Conoce a BOG, arquitectura dedicada a crear espacios que trascienden lo convencional.",
 }
 
 export default function AcercaPage() {

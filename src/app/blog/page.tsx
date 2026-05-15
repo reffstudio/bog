@@ -5,8 +5,8 @@ import { type SanityPost } from "@/components/latest-blog"
 import { client, urlFor } from "@/lib/sanity"
 
 export const metadata = {
-  title: "Blog | BOG Estudio de Arquitectura",
-  description: "Artículos y notas del estudio BOG.",
+  title: "Blog",
+  description: "Artículos y notas de BOG.",
 }
 
 function formatDate(iso?: string) {

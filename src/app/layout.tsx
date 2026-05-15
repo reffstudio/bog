@@ -9,8 +9,11 @@ const gabarito = Gabarito({
 })
 
 export const metadata: Metadata = {
-  title: 'BOG | Estudio de Arquitectura',
-  description: 'La Arquitectura es parte de la búsqueda del ser humano por encontrar un lugar propio en el universo.',
+  title: {
+    default: 'BOG | Arquitectura',
+    template: '%s | BOG Arquitectura',
+  },
+  description: 'La arquitectura es parte de la búsqueda del ser humano por encontrar un lugar propio en el universo.',
   generator: 'v0.app',
   icons: {
     icon: [
