@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 const navLinks = [
   { href: "/", label: "INICIO", isHome: true },
   { href: "/acerca", label: "ACERCA DE", isHome: false },
-  { href: "/proyectos", label: "PROYECTOS", isHome: false },
   { href: "/blog", label: "BLOG", isHome: false },
 ]
 
@@ -101,10 +100,16 @@ export function Header() {
               <XIcon className="h-3 w-3 sm:h-4 sm:w-4" />
             </Link>
           </div>
-          <Button className="flex items-center gap-1 bg-primary px-2 py-1.5 text-[10px] text-primary-foreground hover:bg-primary/90 sm:gap-2 sm:px-3 sm:py-2 sm:text-xs lg:px-4 lg:text-sm">
-            <span className="hidden sm:inline">CONSULTA</span>
-            <span className="sm:hidden">OK</span>
-            <ArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4" />
+          <Button
+            asChild
+            className={`items-center gap-1 bg-primary px-2 py-1.5 text-[10px] text-primary-foreground hover:bg-primary/90 sm:gap-2 sm:px-3 sm:py-2 sm:text-xs lg:px-4 lg:text-sm ${
+              onHome ? "hidden lg:inline-flex" : "inline-flex"
+            }`}
+          >
+            <Link href="/proyectos">
+              <span>PROYECTOS</span>
+              <ArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4" />
+            </Link>
           </Button>
         </div>
       </div>

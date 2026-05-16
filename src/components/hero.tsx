@@ -1,7 +1,9 @@
 "use client"
 
 import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
 import { useEffect, useState } from "react"
+import { Button } from "@/components/ui/button"
 import type { SanityPost } from "@/components/latest-blog"
 import { urlFor } from "@/lib/sanity"
 
@@ -96,6 +98,22 @@ export function Hero({ latestPost }: HeroProps) {
               </p>
             </div>
           </Link>
+        </div>
+
+        <div
+          className={`mt-8 flex w-full max-w-[19rem] justify-center sm:mt-10 md:max-w-md lg:hidden ${
+            isVisible ? "opacity-100" : "opacity-0"
+          } transition-opacity duration-1000 ease-out`}
+        >
+          <Button
+            asChild
+            className="flex w-full items-center justify-center gap-2 bg-primary px-4 py-2.5 text-xs font-medium tracking-wider text-primary-foreground hover:bg-primary/90 sm:text-sm"
+          >
+            <Link href="/proyectos">
+              PROYECTOS
+              <ArrowUpRight className="h-4 w-4 shrink-0" />
+            </Link>
+          </Button>
         </div>
       </div>
 
