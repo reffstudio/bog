@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { PortableText, type PortableTextComponents } from "next-sanity"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { ProjectGallery } from "@/components/project-gallery"
 import { client, sanityFetchOptions, urlFor } from "@/lib/sanity"
 
 export const revalidate = 0
@@ -93,6 +94,14 @@ export default async function ProyectoDetailPage({ params }: PageProps) {
 
   const heroUrl = project.mainImage ? urlFor(project.mainImage).width(1920).height(1080).fit("crop").url() : null
   const vimeoSrc = project.videoUrl ? vimeoPlayerSrc(project.videoUrl) : null
+  const galleryImages =
+    project.gallery
+      ?.map((img, index) => {
+        if (!img) return null
+        const src = urlFor(img).width(1920).fit("max").url()
+        return { src, alt: `${project.title ?? "Proyecto"} — imagen ${index + 1}` }
+      })
+      .filter((item): item is { src: string; alt: string } => item !== null) ?? []
 
   return (
     <main className="min-h-screen bg-background">
@@ -134,24 +143,17 @@ export default async function ProyectoDetailPage({ params }: PageProps) {
             </div>
           ) : null}
 
-          {project.gallery && project.gallery.length > 0 ? (
-            <div className="mt-12 grid gap-4 sm:grid-cols-2">
-              {project.gallery.map((img, i) => {
-                const src = img ? urlFor(img).width(1200).height(900).fit("crop").url() : null
-                if (!src) return null
-                return (
-                  <img
-                    key={`${project._id}-g-${i}`}
-                    src={src}
-                    alt=""
-                    className="h-full w-full rounded-lg object-cover"
-                  />
-                )
-              })}
-            </div>
-          ) : null}
 
-          <div className="mt-16 border-t border-border pt-10">
+        </div>
+
+        {galleryImages.length > 0 ? (
+          <div className="px-6 lg:px-12">
+            <ProjectGallery images={galleryImages} title={project.title} />
+          </div>
+        ) : null}
+
+        <div className="mx-auto max-w-3xl px-6 pb-16 lg:px-12 lg:pb-20">
+          <div className="border-t border-border pt-10">
             <Link
               href="/proyectos"
               className="text-sm font-medium text-primary underline-offset-4 hover:underline"
