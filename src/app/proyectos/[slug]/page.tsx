@@ -4,7 +4,9 @@ import { notFound } from "next/navigation"
 import { PortableText, type PortableTextComponents } from "next-sanity"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { client, urlFor } from "@/lib/sanity"
+import { client, sanityFetchOptions, urlFor } from "@/lib/sanity"
+
+export const revalidate = 0
 
 type SanityImage = {
   _type?: string
@@ -58,6 +60,8 @@ type PageProps = { params: Promise<{ slug: string }> }
 export async function generateStaticParams() {
   const slugs = await client.fetch<string[]>(
     '*[_type == "project" && defined(slug.current)].slug.current',
+    {},
+    sanityFetchOptions,
   )
   return slugs.map((slug) => ({ slug }))
 }
@@ -67,6 +71,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = await client.fetch<string | null>(
     '*[_type == "project" && slug.current == $slug][0].title',
     { slug },
+    sanityFetchOptions,
   )
   return {
     title: title ? `${title} | BOG` : "Proyecto | BOG",
@@ -79,6 +84,7 @@ export default async function ProyectoDetailPage({ params }: PageProps) {
   const project = await client.fetch<ProjectDetail | null>(
     '*[_type == "project" && slug.current == $slug][0]',
     { slug },
+    sanityFetchOptions,
   )
 
   if (!project) {

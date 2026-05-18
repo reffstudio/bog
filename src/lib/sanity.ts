@@ -13,3 +13,9 @@ const builder = createImageUrlBuilder(client)
 export function urlFor(source: Parameters<typeof builder.image>[0]) {
   return builder.image(source)
 }
+
+/** Evita la caché de datos de Next.js / Vercel en cada petición a Sanity. */
+export const sanityFetchOptions = {
+  cache: 'no-store' as const,
+  next: { revalidate: 0 },
+}

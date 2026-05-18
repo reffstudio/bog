@@ -1,7 +1,9 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProjectGrid, type SanityProject } from "@/components/project-grid"
-import { client } from "@/lib/sanity"
+import { client, sanityFetchOptions } from "@/lib/sanity"
+
+export const revalidate = 0
 
 export const metadata = {
   title: "Proyectos",
@@ -9,7 +11,11 @@ export const metadata = {
 }
 
 export default async function ProyectosPage() {
-  const projects = await client.fetch<SanityProject[]>('*[_type == "project"]')
+  const projects = await client.fetch<SanityProject[]>(
+    '*[_type == "project"]',
+    {},
+    sanityFetchOptions,
+  )
 
   return (
     <main className="min-h-screen bg-background">

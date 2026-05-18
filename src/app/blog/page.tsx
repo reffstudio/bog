@@ -2,7 +2,9 @@ import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { type SanityPost } from "@/components/latest-blog"
-import { client, urlFor } from "@/lib/sanity"
+import { client, sanityFetchOptions, urlFor } from "@/lib/sanity"
+
+export const revalidate = 0
 
 export const metadata = {
   title: "Blog",
@@ -25,6 +27,8 @@ function formatDate(iso?: string) {
 export default async function BlogPage() {
   const posts = await client.fetch<SanityPost[]>(
     '*[_type == "post"] | order(coalesce(publishedAt, _createdAt) desc)',
+    {},
+    sanityFetchOptions,
   )
 
   return (

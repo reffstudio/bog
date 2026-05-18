@@ -4,7 +4,9 @@ import { notFound } from "next/navigation"
 import { PortableText, type PortableTextComponents } from "next-sanity"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { client, urlFor } from "@/lib/sanity"
+import { client, sanityFetchOptions, urlFor } from "@/lib/sanity"
+
+export const revalidate = 0
 
 type SanityImage = {
   _type?: string
@@ -62,7 +64,11 @@ function formatDate(iso?: string) {
 type PageProps = { params: Promise<{ slug: string }> }
 
 export async function generateStaticParams() {
-  const slugs = await client.fetch<string[]>('*[_type == "post" && defined(slug.current)].slug.current')
+  const slugs = await client.fetch<string[]>(
+    '*[_type == "post" && defined(slug.current)].slug.current',
+    {},
+    sanityFetchOptions,
+  )
   return slugs.map((slug) => ({ slug }))
 }
 
@@ -71,6 +77,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = await client.fetch<string | null>(
     '*[_type == "post" && slug.current == $slug][0].title',
     { slug },
+    sanityFetchOptions,
   )
   return {
     title: title ? `${title} | BOG Blog` : "Entrada | BOG",
@@ -83,6 +90,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post = await client.fetch<PostDetail | null>(
     '*[_type == "post" && slug.current == $slug][0]',
     { slug },
+    sanityFetchOptions,
   )
 
   if (!post) {
