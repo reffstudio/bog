@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useState, type CSSProperties } from "react"
+import { useCallback, useState } from "react"
 import Lightbox from "yet-another-react-lightbox"
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -80,15 +80,14 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
         animation={{ fade: 280, swipe: 320 }}
         styles={{
           container: { backgroundColor: "#000000" },
-          root: { "--yarl__color_backdrop": "#000000" } as CSSProperties,
         }}
         render={{
-          buttonClose: ({ close }) => (
+          buttonClose: () => (
             <button
               type="button"
-              onClick={close}
+              onClick={() => setOpen(false)}
               aria-label="Cerrar galería"
-              className="yarl__button_close bog-lightbox__close"
+              className="yarl__button bog-lightbox__close"
             >
               <X className="h-5 w-5" strokeWidth={1.25} aria-hidden />
             </button>
