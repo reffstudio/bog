@@ -99,9 +99,16 @@ export default async function ProyectoDetailPage({ params }: PageProps) {
       ?.map((img, index) => {
         if (!img) return null
         const src = urlFor(img).width(1920).fit("max").url()
-        return { src, alt: `${project.title ?? "Proyecto"} — imagen ${index + 1}` }
+        const srcFull = urlFor(img).width(2800).fit("max").url()
+        return {
+          src,
+          srcFull,
+          alt: `${project.title ?? "Proyecto"} — imagen ${index + 1}`,
+        }
       })
-      .filter((item): item is { src: string; alt: string } => item !== null) ?? []
+      .filter(
+        (item): item is { src: string; srcFull: string; alt: string } => item !== null,
+      ) ?? []
 
   return (
     <main className="min-h-screen bg-background">

@@ -92,3 +92,70 @@
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+/* Galería de proyectos — lightbox minimalista */
+.bog-lightbox {
+  --yarl__color_backdrop: #000000;
+  --yarl__color_button: rgba(255, 255, 255, 0.92);
+  --yarl__color_button_active: #ffffff;
+}
+
+.bog-lightbox .yarl__container {
+  background-color: #000000 !important;
+}
+
+.bog-lightbox .yarl__slide_image {
+  max-height: 92vh;
+  object-fit: contain;
+}
+
+.bog-lightbox .yarl__button {
+  filter: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background-color: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.bog-lightbox .yarl__button:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
+.bog-lightbox .yarl__button:disabled {
+  opacity: 0.25;
+}
+
+.bog-lightbox .yarl__navigation_prev,
+.bog-lightbox .yarl__navigation_next {
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .bog-lightbox .yarl__navigation_prev,
+  .bog-lightbox .yarl__navigation_next {
+    padding-inline: 2rem;
+  }
+}
+
+.bog-lightbox .bog-lightbox__close {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  color: #ffffff;
+}
+
+.bog-lightbox .bog-lightbox__close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
